@@ -4,23 +4,20 @@ import MinAndHour from "./Converter/MinAndHour";
 import KmAndMile from "./Converter/kmAndMile";
 
 function App() {
-  const [value, setValue] = useState(true);
-
-  const setDistance = () => {
-    setValue(false);
-  };
-
-  const setTime = () => {
-    setValue(true);
+  const [index, setIndex] = useState(0);
+  const onSelect = (event) => {
+    setIndex(event.target.value);
   };
 
   return (
     <div>
       <div>
-        <button onClick={setDistance}>{`Km <-> Mile`}</button>
-        <button onClick={setTime}>{`Minutes <-> Hours`}</button>
+        <select value={index} onChange={onSelect}>
+          <option value="0">Minutes & Hours</option>
+          <option value="1">Km & Miles</option>
+        </select>
+        {index === "0" ? <MinAndHour /> : <KmAndMile />}
       </div>
-      {value ? <MinAndHour /> : <KmAndMile />}
     </div>
   );
 }
